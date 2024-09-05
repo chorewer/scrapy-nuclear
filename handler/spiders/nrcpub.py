@@ -10,8 +10,8 @@ class NrcSpider(scrapy.Spider):
     allowed_domains = []
     req_meta = {
         "max_retry_times": 6,
-        "download_timeout": 60
-        # "proxy":"https://i369.kdltps.com:15818"
+        "download_timeout": 5
+        # "proxy":"http://hk04.allzhen.com:443"
     }
 
     req_headers = {
@@ -47,6 +47,7 @@ class NrcSpider(scrapy.Spider):
             "/staff","/brochures","/conference","/contract","/agreement","/knowledge"
         ]
         for link,mini in zip(start_link,type):
+            self.log("SENDING REQUEST",level=200)
             yield Request(
                 url=link,
                 cb_kwargs=dict(over_path=mini),

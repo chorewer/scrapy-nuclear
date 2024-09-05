@@ -101,3 +101,15 @@ class HandlerDownloaderMiddleware:
 
     def spider_opened(self, spider):
         spider.logger.info("Spider opened: %s" % spider.name)
+
+#添加需要账号和密码身份验证的ip例子
+import base64
+class ProxyMiddleware(object):
+    def process_request(self,request,spider):
+        # 随机选出代理信息
+        proxy = "az06dcjhh.alljie.space:443"
+        # 设置代理的认证信息
+        auth = base64.b64encode(bytes("az06kdhcbsja.kulime.space:928916be-6e3d-3bf2-97f4-f9b0b7b2eacc", 'utf-8'))
+        request.headers['Proxy-Authorization'] = b'Basic ' + auth
+        # 设置代理ip (http/https)
+        request.meta['proxy'] = 'http://' + proxy
